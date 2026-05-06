@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Readables — Debarshi Basak</title>
+<meta name="description" content="Notes and essays by Debarshi Basak.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><text y=%2248%22 font-size=%2248%22>📖</text></svg>">
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --fg: #1c1c1c;
+    --muted: #6b6b6b;
+    --rule: #e6e3dc;
+    --accent: #a4421a;
+    --maxw: 38rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14130f;
+      --fg: #e8e6e0;
+      --muted: #9a978f;
+      --rule: #2b2926;
+      --accent: #e08a5f;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Charter", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  main {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 4rem 1.5rem 6rem;
+  }
+  header.site {
+    margin-bottom: 3rem;
+  }
+  header.site h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.25rem;
+  }
+  header.site p {
+    color: var(--muted);
+    margin: 0;
+    font-style: italic;
+  }
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  a:hover { text-decoration: underline; }
+  ul.posts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--rule);
+  }
+  ul.posts li {
+    border-bottom: 1px solid var(--rule);
+    padding: 1.25rem 0;
+  }
+  ul.posts a.title {
+    color: var(--fg);
+    font-size: 1.15rem;
+    font-weight: 600;
+    display: block;
+  }
+  ul.posts a.title:hover { color: var(--accent); text-decoration: none; }
+  ul.posts .meta {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+    margin-top: 0.15rem;
+  }
+  ul.posts .summary {
+    color: var(--fg);
+    margin-top: 0.4rem;
+    opacity: 0.85;
+  }
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+</style>
+</head>
+<body>
+<main>
+  <header class="site">
+    <h1>Readables</h1>
+    <p>Notes and essays by Debarshi Basak.</p>
+  </header>
+
+  <ul class="posts">
+    <li>
+      <a class="title" href="blogs/hello-world.html">Hello, world</a>
+      <div class="meta"><time datetime="2026-05-07">May 7, 2026</time></div>
+      <div class="summary">A short note on what this site is for and why it exists.</div>
+    </li>
+  </ul>
+
+  <footer>
+    <span>© <span id="year">2026</span> Debarshi Basak</span>
+    <span><a href="https://github.com/debarshibasak">github</a></span>
+  </footer>
+</main>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
