@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beyond DevOps — Readables</title>
+<meta name="description" content="On letting Claude run my infra, and what I saw on the other side.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><text y=%2248%22 font-size=%2248%22>📖</text></svg>">
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --fg: #1c1c1c;
+    --muted: #6b6b6b;
+    --rule: #e6e3dc;
+    --accent: #a4421a;
+    --code-bg: #f1eee7;
+    --maxw: 38rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14130f;
+      --fg: #e8e6e0;
+      --muted: #9a978f;
+      --rule: #2b2926;
+      --accent: #e08a5f;
+      --code-bg: #1f1d19;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Charter", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  main {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+  nav.top {
+    margin-bottom: 3rem;
+    font-size: 0.9rem;
+  }
+  nav.top a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  nav.top a:hover { color: var(--accent); }
+  article header {
+    margin-bottom: 2.5rem;
+  }
+  article h1 {
+    font-size: 1.9rem;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin: 0 0 0.5rem;
+  }
+  article .meta {
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+  }
+  article p { margin: 0 0 1.2rem; }
+  article a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+  }
+  article h2 {
+    font-size: 1.25rem;
+    margin: 2.5rem 0 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  article blockquote {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--rule);
+    color: var(--muted);
+    font-style: italic;
+  }
+  article code {
+    background: var(--code-bg);
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  article pre {
+    background: var(--code-bg);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  article pre code {
+    background: none;
+    padding: 0;
+  }
+  article hr {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 3rem 0;
+  }
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <nav class="top"><a href="../index.html">← all posts</a></nav>
+
+  <article>
+    <header>
+      <h1>Beyond DevOps</h1>
+      <div class="meta"><time datetime="2026-05-08">May 8, 2026</time></div>
+    </header>
+
+    <p>It started as a joke I made to myself at 2am. What if I just&hellip; let Claude run everything?</p>
+
+    <p>Not &ldquo;help me write a script.&rdquo; Not &ldquo;explain this YAML.&rdquo; I mean the whole stack &mdash; databases, servers, the Kubernetes cluster I&rsquo;d been babying for months. Hand it over. Walk away. See what happens.</p>
+
+    <p>It was a stupid idea. The kind you laugh off and go to bed. But laziness is a stronger force than caution, and after weeks of letting Claude write my code, my emails, and my commit messages, the muscle for &ldquo;just do it yourself&rdquo; had quietly atrophied. So I gave it the keys.</p>
+
+    <p>The first runs were embarrassing. It couldn&rsquo;t connect over SSH. It misread error messages. It retried the same broken command three times in a row, like a tourist hitting a vending machine that already ate their dollar. I almost killed the experiment.</p>
+
+    <p>Then I wrote a handful of skills &mdash; small, sharp instructions for the things it kept tripping on. And something flipped.</p>
+
+    <p>It started pulling system status without me asking. Surfacing what was off &mdash; a noisy pod, a slow query, a disk creeping toward full. Telling me what could be optimized and how. And the optimization itself? One Enter press away. I sat there, hands off the system with auto mode, watching an agent reason about my infra better than half the engineers I&rsquo;ve worked with.</p>
+
+    <p>That&rsquo;s the part I didn&rsquo;t see coming. Not the failure. The competence.</p>
+
+    <h2>The scary part</h2>
+
+    <p>It does look scary. To the pessimists: yes, a new era is dawning on us. To the optimists: no, we&rsquo;re not quite there yet. Classifiers inside Claude can stop the agent from dropping tables, deleting files, or killing processes &mdash; but their presence alone doesn&rsquo;t really earn trust. There&rsquo;s still a nagging feeling, late at night, that the agent could slip past its context and wreak havoc you only notice in the morning.</p>
+
+    <h2>The absurd upside</h2>
+
+    <p>And yet &mdash; and this is the part I keep wrestling with &mdash; the upside is absurd. The automation ceiling here is at least 100x what you&rsquo;d hit with GitHub Actions, Tines, Torq, or any of the modern automation platforms we&rsquo;ve been pretending are the future. You describe what you want. It writes the code. It runs the code. It tells you what happened. The loop that took a sprint now fits in a paragraph.</p>
+
+    <p>I don&rsquo;t think there will be a discipline called DevOps in the next 8 to 12 months. Not gone &mdash; absorbed. The work doesn&rsquo;t vanish; it migrates into prose. The job title evaporates while the work multiplies.</p>
+
+    <h2>What lies beyond</h2>
+
+    <p>What lies beyond DevOps is a bunch of markdown files &mdash; and a punishingly deep understanding of networks, cloud, VMs, and DevSecOps. The bar doesn&rsquo;t drop. It rises. The surface gets simpler while the floor gets deeper, and somewhere in that gap, the door for beginners quietly closes.</p>
+
+    <hr>
+
+    <p>The tools are rewriting the rules while we&rsquo;re still reading the manual. The roles we built our careers on are dissolving in real time. And the only honest thing left to say is this: the ground is moving &mdash; and none of us know yet where it lands.</p>
+  </article>
+
+  <footer>
+    <a href="../index.html">← all posts</a>
+  </footer>
+</main>
+</body>
+</html>

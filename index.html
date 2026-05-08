@@ -54,6 +54,16 @@
     margin: 0;
     font-style: italic;
   }
+  header.site .follow {
+    margin-top: 1rem;
+    font-style: normal;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  header.site .follow a {
+    color: var(--accent);
+  }
+  header.site .follow a:hover { text-decoration: underline; }
   a {
     color: var(--accent);
     text-decoration: none;
@@ -105,9 +115,15 @@
   <header class="site">
     <h1>Readables</h1>
     <p>Notes and essays by Debarshi Basak.</p>
+    <p class="follow">Want to follow along? <a href="https://github.com/debarshibasak/readables">Star or watch the repo on GitHub</a> &mdash; you&rsquo;ll be notified automatically when a new post goes up.</p>
   </header>
 
   <ul class="posts">
+    <li>
+      <a class="title" href="blogs/beyond-devops.html">Beyond DevOps</a>
+      <div class="meta"><time datetime="2026-05-08">May 8, 2026</time></div>
+      <div class="summary">On letting Claude run my infra, and what I saw on the other side.</div>
+    </li>
     <li>
       <a class="title" href="blogs/hello-world.html">Hello, world</a>
       <div class="meta"><time datetime="2026-05-07">May 7, 2026</time></div>
