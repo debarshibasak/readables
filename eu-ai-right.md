@@ -2,7 +2,7 @@
 
 I had a funny situation today.
 
-KPN — one of the largest internet providers in the Netherlands — was being a bit wonky. It was Sunday, and against my better judgment I decided to call their service center anyway. The line picked up, and a voice cheerfully informed me right away that I was speaking with an AI agent.
+One of the largest internet providers in the Netherlands was being a bit wonky. It was Sunday, and against my better judgment I decided to call their service center anyway. The line picked up, and a voice cheerfully informed me right away that I was speaking with an AI agent.
 
 So far, so normal. Then it did something I genuinely didn't expect.
 
@@ -30,7 +30,7 @@ These aren't quirks. They're the cultural fingerprints of a place that decided p
 
 And now that decision has to survive contact with a colleague who never sleeps. Agents don't have kids to pick up. They don't need a Tuesday off to recover from the weekend. So the question is: do we let them work all the time, or do we make them match the rhythm of the people they work alongside?
 
-KPN, apparently, picked the second one.
+This particular internet company, apparently, picked the second one.
 
 ## Two futures
 
