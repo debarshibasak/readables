@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Building with Agents — Readables</title>
+<meta name="description" content="Agents get you to 90% fast. The last 10% is where the engineering lives — and it still belongs to you. Notes on the last mile, decisions, and scope creep.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><text y=%2248%22 font-size=%2248%22>📖</text></svg>">
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --fg: #1c1c1c;
+    --muted: #6b6b6b;
+    --rule: #e6e3dc;
+    --accent: #a4421a;
+    --code-bg: #f1eee7;
+    --maxw: 38rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14130f;
+      --fg: #e8e6e0;
+      --muted: #9a978f;
+      --rule: #2b2926;
+      --accent: #e08a5f;
+      --code-bg: #1f1d19;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Charter", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  main {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+  nav.top {
+    margin-bottom: 3rem;
+    font-size: 0.9rem;
+  }
+  nav.top a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  nav.top a:hover { color: var(--accent); }
+  article header {
+    margin-bottom: 2.5rem;
+  }
+  article h1 {
+    font-size: 1.9rem;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin: 0 0 0.5rem;
+  }
+  article .meta {
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+  }
+  article p { margin: 0 0 1.2rem; }
+  article a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+  }
+  article h2 {
+    font-size: 1.25rem;
+    margin: 2.5rem 0 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  article blockquote {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--rule);
+    color: var(--muted);
+    font-style: italic;
+  }
+  article code {
+    background: var(--code-bg);
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  article pre {
+    background: var(--code-bg);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  article pre code {
+    background: none;
+    padding: 0;
+  }
+  article hr {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 3rem 0;
+  }
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <nav class="top"><a href="../index.html">← all posts</a></nav>
+
+  <article>
+    <header>
+      <h1>Building with Agents</h1>
+      <div class="meta"><time datetime="2026-06-03">June 3, 2026</time></div>
+    </header>
+
+    <p>If you peel back the layers from agents and all the AI stuff, the true serendipity is when an agent actually generates a project that takes almost every consideration into account — something big and almost ready to roll out, but not quite.</p>
+
+    <p>I have tried generating a full-blown enterprise-grade project, and it gets 90% done. But finishing it — the last mile, with all the bugs — is exhausting. There is also the temptation to just ship it as is, which is more dangerous.</p>
+
+    <p>Another pitfall is when people use agents as decision makers. Agents are assistants; you cannot make them take decisions on your behalf, because the decision is irrational to begin with — it is randomized. The reasoning is human-like, but it is not human reasoning.</p>
+
+    <p>The reason quite a lot of software was stable in the pre-AI era is that the scope was limited to begin with. Limited scope and handcrafting led to better know-how. Creeping the scope is very easy with AI, and I think that gives a sense of fake productivity. Scope creep is subtle with agents: you have a sense of the end goal, it feels like you are almost there, but then you run into issues that are now extremely difficult to solve. So you prompt the agents again, and layer by layer you accumulate tech debt.</p>
+
+    <h2>Conclusion</h2>
+
+    <p>None of this is an argument against building with agents. It is an argument for building with them honestly. The leverage is real; getting to 90% in a fraction of the time it used to take is genuinely new. But the 90% is the easy part — the last 10% is where the actual engineering lives, and no amount of prompting moves that work onto the agent. It still belongs to you.</p>
+
+    <p>So treat agents as what they are: fast, tireless assistants — not collaborators you can hand the wheel to. Keep the scope deliberately small, own the decisions, and stay close enough to the code to understand what was actually built. The teams that win with agents will not be the ones who shipped the most in a weekend; they will be the ones who knew exactly which 10% they still had to earn.</p>
+  </article>
+
+  <footer>
+    <a href="../index.html">← all posts</a>
+  </footer>
+</main>
+</body>
+</html>
