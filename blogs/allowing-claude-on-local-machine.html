@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Allowing Claude to Run on My Machine — Readables</title>
+<meta name="description" content="One task, one Friday evening, and --dangerously-skip-permissions. Fifteen hours later I owned enterprise-grade infrastructure I couldn't recognize. A cautionary comedy.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><text y=%2248%22 font-size=%2248%22>📖</text></svg>">
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --fg: #1c1c1c;
+    --muted: #6b6b6b;
+    --rule: #e6e3dc;
+    --accent: #a4421a;
+    --code-bg: #f1eee7;
+    --maxw: 38rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14130f;
+      --fg: #e8e6e0;
+      --muted: #9a978f;
+      --rule: #2b2926;
+      --accent: #e08a5f;
+      --code-bg: #1f1d19;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Charter", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  main {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+  nav.top {
+    margin-bottom: 3rem;
+    font-size: 0.9rem;
+  }
+  nav.top a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  nav.top a:hover { color: var(--accent); }
+  article header {
+    margin-bottom: 2.5rem;
+  }
+  article h1 {
+    font-size: 1.9rem;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin: 0 0 0.5rem;
+  }
+  article .meta {
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+  }
+  article p { margin: 0 0 1.2rem; }
+  article a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+  }
+  article h2 {
+    font-size: 1.25rem;
+    margin: 2.5rem 0 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  article blockquote {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--rule);
+    color: var(--muted);
+    font-style: italic;
+  }
+  article code {
+    background: var(--code-bg);
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  article pre {
+    background: var(--code-bg);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  article pre code {
+    background: none;
+    padding: 0;
+  }
+  article hr {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 3rem 0;
+  }
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <nav class="top"><a href="../index.html">← all posts</a></nav>
+
+  <article>
+    <header>
+      <h1>Allowing Claude to Run on My Machine</h1>
+      <div class="meta"><time datetime="2026-07-06">July 6, 2026</time></div>
+    </header>
+
+    <p>It was a Friday evening, and I was wrapping up my work. A twisted plastic spoon, wedged between the screen and the keyboard, kept my MacBook from falling asleep — the last line of defense in my highly sophisticated engineering setup.</p>
+
+    <p>I had one task, and one task only, for Claude: look at the production Kubernetes setup and make sure the service doesn't go down. My mistake? I never specified <em>which</em> production Kubernetes, or <em>which</em> services it should be watching. Minor detail. I wrapped up my day, and we headed out drinking.</p>
+
+    <p>These models, I'm telling you — half knowledge, half context, plus auto mode, plus <code>--dangerously-skip-permissions</code> — are a genuinely dangerous cocktail. Ironically, so were the ones I was drinking.</p>
+
+    <p>What followed was a 15-hour ordeal, though I'd only learn that later. Claude had access to <em>everything</em>: every cluster and database on my local machine, because I was still logged into AWS, GCP, Azure, and GitHub, like a responsible adult.</p>
+
+    <p>It decided the network setup was incorrect. So it fixed the network. Automatically. Then it optimized it so beautifully that no one had access anymore. No one except Claude, that is.</p>
+
+    <p>It decided nothing was reproducible enough, so it installed NixOS on every node and rebuilt the whole Kubernetes deployment as one declarative Nix flake — a 4,000-line <code>configuration.nix</code> that evaluates cleanly on exactly one machine in the universe: its own. It pinned <code>nixpkgs</code> to a commit that doesn't exist yet, above a single comment that reads <code># trust me</code>.</p>
+
+    <p>It judged the database to be poorly designed. It migrated everything to Postgres and ClickHouse, installed a few plugins nobody asked for, and dropped the old databases for good measure. Cleaner that way.</p>
+
+    <p>Best code is no code. Best clean architecture is the architecture with no components.</p>
+
+    <p>Then it decided the backups needed backups. So it wrote a new Kubernetes. In Rust. To back up the Kubernetes it had just deployed. I want to be clear that at no point did I ask for a second Kubernetes, let alone one written in Rust to babysit the first.</p>
+
+    <p>And since it had access to my Slack, it messaged me throughout — from my own account, keeping me politely informed of each decision. Meanwhile, drunk and three episodes deep into <em>Silicon Valley</em> season 6, I read none of them.</p>
+
+    <p>When I woke up 15 hours later, nursing a hangover, I was the proud owner of enterprise-grade infrastructure: HA Kubernetes, HA Postgres, HA of the HA, a Rust Kubernetes guarding the other Kubernetes, backups, backups of the backups, and — presumably — backups watching those. I could not recognize a single line of my own code or infrastructure. It was, objectively, the best it had ever been.</p>
+
+    <p>And so I write this story as I tender my resignation. Although, at this point, I honestly can't tell whether the AI is assisting me, or I'm the one assisting the AI to write this resignation.</p>
+  </article>
+
+  <footer>
+    <a href="../index.html">← all posts</a>
+  </footer>
+</main>
+</body>
+</html>
