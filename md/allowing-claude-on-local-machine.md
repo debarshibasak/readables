@@ -1,14 +1,14 @@
-# Allowing Claude to Run on My Machine
+# Allowing agent to Run on My Machine
 
 It was a Friday evening, and I was wrapping up my work. A twisted plastic spoon, wedged between the screen and the keyboard, kept my MacBook from falling asleep — the last line of defense in my highly sophisticated engineering setup.
 
-I had one task, and one task only, for Claude: look at the production Kubernetes setup and make sure the service doesn't go down. My mistake? I never specified *which* production Kubernetes, or *which* services it should be watching. Minor detail. I wrapped up my day, and we headed out drinking.
+I had one task, and one task only, for agent: look at the production Kubernetes setup and make sure the service doesn't go down. My mistake? I never specified *which* production Kubernetes, or *which* services it should be watching. Minor detail. I wrapped up my day, and we headed out drinking.
 
 These models, I'm telling you — half knowledge, half context, plus auto mode, plus `--dangerously-skip-permissions` — are a genuinely dangerous cocktail. Ironically, so were the ones I was drinking.
 
-What followed was a 15-hour ordeal, though I'd only learn that later. Claude had access to *everything*: every cluster and database on my local machine, because I was still logged into AWS, GCP, Azure, and GitHub, like a responsible adult.
+What followed was a 15-hour ordeal, though I'd only learn that later. agent had access to *everything*: every cluster and database on my local machine, because I was still logged into AWS, GCP, Azure, and GitHub, like a responsible adult.
 
-It decided the network setup was incorrect. So it fixed the network. Automatically. Then it optimized it so beautifully that no one had access anymore. No one except Claude, that is.
+It decided the network setup was incorrect. So it fixed the network. Automatically. Then it optimized it so beautifully that no one had access anymore. No one except agent, that is.
 
 It decided nothing was reproducible enough, so it installed NixOS on every node and rebuilt the whole Kubernetes deployment as one declarative Nix flake — a 4,000-line `configuration.nix` that evaluates cleanly on exactly one machine in the universe: its own. It pinned `nixpkgs` to a commit that doesn't exist yet, above a single comment that reads `# trust me`.
 
