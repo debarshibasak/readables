@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Do we still need GitHub? — Readables</title>
+<meta name="description" content="GitHub's August 17 post-mortem shows commits per month doubling to 2.9 billion since April. What git still records, what it no longer does, and the layer that is missing above it.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><text y=%2248%22 font-size=%2248%22>📖</text></svg>">
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --fg: #1c1c1c;
+    --muted: #6b6b6b;
+    --rule: #e6e3dc;
+    --accent: #a4421a;
+    --code-bg: #f1eee7;
+    --maxw: 38rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14130f;
+      --fg: #e8e6e0;
+      --muted: #9a978f;
+      --rule: #2b2926;
+      --accent: #e08a5f;
+      --code-bg: #1f1d19;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Charter", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  main {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+  nav.top {
+    margin-bottom: 3rem;
+    font-size: 0.9rem;
+  }
+  nav.top a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  nav.top a:hover { color: var(--accent); }
+  article header {
+    margin-bottom: 2.5rem;
+  }
+  article h1 {
+    font-size: 1.9rem;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin: 0 0 0.5rem;
+  }
+  article .meta {
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+  }
+  article p { margin: 0 0 1.2rem; }
+  article a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+  }
+  article h2 {
+    font-size: 1.25rem;
+    margin: 2.5rem 0 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  article blockquote {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--rule);
+    color: var(--muted);
+    font-style: italic;
+  }
+  article code {
+    background: var(--code-bg);
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  article pre {
+    background: var(--code-bg);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  article pre code {
+    background: none;
+    padding: 0;
+  }
+  article hr {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 3rem 0;
+  }
+  article figure {
+    margin: 2rem 0;
+  }
+  article figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    border: 1px solid var(--rule);
+  }
+  article figure figcaption {
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-top: 0.6rem;
+    font-style: italic;
+  }
+  article figure figcaption a { color: var(--muted); }
+  article figure figcaption a:hover { color: var(--accent); }
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <nav class="top"><a href="../index.html">← all posts</a></nav>
+
+  <article>
+    <header>
+      <h1>Do we still need GitHub?</h1>
+      <div class="meta"><time datetime="2026-08-21">August 21, 2026</time></div>
+    </header>
+
+    <p>GitHub was down for seven hours and forty-seven minutes on 17 August. I was not blocked. The agents kept running, the code was on my laptop, the tests passed. The only thing I could not do was push.</p>
+
+    <p>That is worth examining. In a codebase mostly written by agents, what is git a system of record for?</p>
+
+    <h2>The numbers</h2>
+
+    <p><a href="https://github.blog/news-insights/company-news/the-august-17-outage-and-the-work-ahead/">GitHub&rsquo;s write-up</a> is a growth report with an outage attached.</p>
+
+    <figure>
+      <img src="img/gh-growth.png" alt="Three line charts showing merged pull requests per month rising to 130 million, commits per month rising to 2.9 billion, and new repositories per month rising to 24 million, from 2023 through August 2026.">
+      <figcaption>Merged pull requests, commits, and new repositories per month. Source: <a href="https://github.blog/news-insights/company-news/the-august-17-outage-and-the-work-ahead/">GitHub</a>.</figcaption>
+    </figure>
+
+    <p>Commits per month went from 1.4 billion in April 2026 to 2.9 billion in August. Merged pull requests reached 130 million a month, new repositories 24 million.</p>
+
+    <figure>
+      <img src="img/gh-actions-runs.png" alt="Line chart titled Growth in completed GitHub Actions runs, rising from roughly 25 million in January 2026 to 115.4 million in August 2026, with a repeating weekly sawtooth pattern.">
+      <figcaption>Completed Actions runs, January to August 2026. Source: <a href="https://github.blog/news-insights/company-news/the-august-17-outage-and-the-work-ahead/">GitHub</a>.</figcaption>
+    </figure>
+
+    <p>Actions runs reached 115.4 million. The sawtooth is weekends; agents still mostly run when a human starts them.</p>
+
+    <p>GitHub&rsquo;s remediation is three million additional CPU cores and 120 petabytes of storage. Neither recent incident involved a bad deploy or a bad config. Both were capacity failures.</p>
+
+    <h2>What breaks for humans</h2>
+
+    <p>Agents commit at machine cadence &mdash; forty commits in an afternoon where a feature used to take a week of deliberate ones.</p>
+
+    <p>I do not read commit history anymore. <code>git blame</code> returns a message an agent wrote to satisfy a convention, describing a change made for reasons it no longer holds in context.</p>
+
+    <p><code>git bisect</code> is worse off. It assumes each commit builds independently and that the property under test flips exactly once across the range. Agent commits are checkpoints in a loop, so half do not compile on their own. Bisect is effectively unusable on my repositories now.</p>
+
+    <h2>What breaks for storage</h2>
+
+    <p>Git is a content-addressed object store, and packfiles keep it tractable by delta-compressing similar objects against one another. That assumes successive versions of a file are similar, which is what human editing produces.</p>
+
+    <p>Agents rewrite whole files, rename concepts across directories, and restructure modules because restructuring is cheaper than editing. Those are poor deltas, so packs grow closer to linear in commit count than in actual change.</p>
+
+    <figure>
+      <img src="img/gh-fetch-throughput.png" alt="Two charts labelled Fetch Throughput History, comparing git fetch operations per second before and after GitHub's remediation work.">
+      <figcaption>Git fetch throughput, before and after remediation. Source: <a href="https://github.blog/news-insights/company-news/the-august-17-outage-and-the-work-ahead/">GitHub</a>.</figcaption>
+    </figure>
+
+    <p>One detail from the same report: Copilot&rsquo;s outage was prolonged by a client-side retry loop that increased traffic during recovery. An agent amplified the outage while it was happening. A human who gets a 500 stops. A retry loop does not, across every developer&rsquo;s fleet at once.</p>
+
+    <h2>What git records</h2>
+
+    <p>Git records code &mdash; what it looks like now, what it looked like before, who changed it, how to get back. That was worth the engineering effort when code was expensive.</p>
+
+    <p>If I can regenerate a module from a prompt in ninety seconds, the code is not the valuable artifact. The path to it is: the PRD, the prompt that worked and the four that did not, the harness run that found the bug, what the agent tried and abandoned, the constraint someone typed at 2am that shaped everything after it.</p>
+
+    <p>None of that is in git. This is what <a href="prd-driven-development.html">PRD-driven development</a> was reaching for, and it did not go far enough.</p>
+
+    <h2>What it cannot merge</h2>
+
+    <p>Three developers, one goal, three agent runs, three different codebases &mdash; different abstractions, different file layouts, different names for the same concept. The nondeterminism moved from the line level to the architecture level.</p>
+
+    <p>Git merges text. A three-way merge assumes a common ancestor and small divergence from it, and agent runs violate both. When two runs disagree about whether something is a class or a closure, there is no merge algorithm, only a decision. GitHub presents the output as the thing to reconcile, but the conflict happened upstream, in three prompts nobody wrote down.</p>
+
+    <h2>What still needs git</h2>
+
+    <p>Git is not going anywhere. CI triggers on it, deploys pin to it, rollback is a revert, and provenance and signed releases assume a commit SHA is immutable. That is load-bearing infrastructure regardless of who wrote the diff.</p>
+
+    <p>But it has changed jobs. It is no longer how we understand a codebase. It is content-addressed storage with a very good distribution model.</p>
+
+    <p>The missing layer sits above it: prompts, PRDs, harness runs, agent memory &mdash; versioned, diffable, and shared across a team the way code is. Nobody has built it well yet. Meanwhile the reasoning that produced ten thousand lines this week is in a scrollback buffer I will close tomorrow, and we are adding 120 petabytes to store the output instead.</p>
+  </article>
+
+  <footer>
+    <a href="../index.html">← all posts</a>
+  </footer>
+</main>
+</body>
+</html>
