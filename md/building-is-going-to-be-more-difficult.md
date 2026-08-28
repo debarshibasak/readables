@@ -1,4 +1,4 @@
-# It is going to be difficult to build
+# The Easy Part of Building Is Over
 
 There is a lot of serendipity when you generate your first piece of code these days. It almost feels like magic. But as everyone gets access to these generative coding harnesses, one thing that now bothers me is that it is getting even harder to build software.
 
