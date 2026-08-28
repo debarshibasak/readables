@@ -56,4 +56,4 @@ Git is not going anywhere. CI triggers on it, deploys pin to it, rollback is a r
 
 But it has changed jobs. It is no longer how we understand a codebase. It is content-addressed storage with a very good distribution model.
 
-The missing layer sits above it: prompts, PRDs, harness runs, agent memory — versioned, diffable, and shared across a team the way code is. Nobody has built it well yet. Meanwhile the reasoning that produced ten thousand lines this week is in a scrollback buffer I will close tomorrow, and we are adding 120 petabytes to store the output instead.
+[The missing layer](soul-md.html) sits above it: prompts, PRDs, harness runs, agent memory — versioned, diffable, and shared across a team the way code is. Nobody has built it well yet. Meanwhile the reasoning that produced ten thousand lines this week is in a scrollback buffer I will close tomorrow, and we are adding 120 petabytes to store the output instead.
