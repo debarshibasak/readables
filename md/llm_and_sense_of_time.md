@@ -1,4 +1,4 @@
-# What AI does to your sense of time
+# What AI does to my sense of time
 
 The sense of time is interesting. You do not experience time as the single vector described in physics books. Your mind constructs a sense of duration out of attention, memory, emotion, and bodily signals.
 
