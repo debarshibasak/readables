@@ -1,0 +1,10 @@
+# Cambrian Explosion of AI
+
+The Cambrian explosion was a period, beginning about 539 million years ago, when animal life diversified rapidly in Earth's oceans.
+
+Changing ocean conditions set off an evolutionary race among species to be better and faster, to defend themselves and to prey on others. Changes in how genes were controlled allowed evolution to produce a wider variety of forms. No one knows exactly what triggered it, but it led to complex life, and here we are now.
+
+We are in the same era with AI, except we know what triggered this Cambrian explosion: GPT.
+More computing power, more training data, better architectures and pretrained models that handle general-purpose tasks. Researchers and companies compete to improve usefulness, reliability, speed and cost. AI is expanding into coding, tutoring, design and research. People are building more and more software on top of AI, making it even more powerful.
+
+If we take the analogy of the Cambrian explosion and extrapolate it to today's reality, we could theorize that power will concentrate among a handful of models. I think the world will become more complex and not easily comprehensible, something we humans will eventually wrap our heads around, like we did with computers and the internet.
