@@ -16,7 +16,7 @@ I asked AI to generate an ending and here it is.
 
 Meanwhile, Dave is flying through Kansas. Galileo had the sun. Dave has a layover.
 
-If the god, talks like this, count me out.
+If the god talks like this, count me out.
 
 [1] https://www.nytimes.com/2026/01/23/style/ai-algorithm-god-religion.html
 
