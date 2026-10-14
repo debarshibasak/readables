@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inference vs Distillation — Readables</title>
+<meta name="description" content="Coding agents reason through the same work over and over and keep none of it. Every solved task should leave behind tested software that makes the next run cheaper.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><text y=%2248%22 font-size=%2248%22>📖</text></svg>">
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --fg: #1c1c1c;
+    --muted: #6b6b6b;
+    --rule: #e6e3dc;
+    --accent: #a4421a;
+    --code-bg: #f1eee7;
+    --maxw: 38rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14130f;
+      --fg: #e8e6e0;
+      --muted: #9a978f;
+      --rule: #2b2926;
+      --accent: #e08a5f;
+      --code-bg: #1f1d19;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Charter", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  main {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+  nav.top {
+    margin-bottom: 3rem;
+    font-size: 0.9rem;
+  }
+  nav.top a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  nav.top a:hover { color: var(--accent); }
+  article header {
+    margin-bottom: 2.5rem;
+  }
+  article h1 {
+    font-size: 1.9rem;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin: 0 0 0.5rem;
+  }
+  article .meta {
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+  }
+  article p { margin: 0 0 1.2rem; }
+  article a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+  }
+  article h2 {
+    font-size: 1.25rem;
+    margin: 2.5rem 0 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  article blockquote {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--rule);
+    color: var(--muted);
+    font-style: italic;
+  }
+  article code {
+    background: var(--code-bg);
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  article pre {
+    background: var(--code-bg);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  article pre code {
+    background: none;
+    padding: 0;
+  }
+  article hr {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 3rem 0;
+  }
+  article table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    margin: 1.5rem 0 2rem;
+  }
+  article th, article td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.6rem 0.6rem 0.6rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  article th {
+    font-weight: 600;
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  article .table-wrap { overflow-x: auto; }
+
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <nav class="top"><a href="../index.html">← all posts</a></nav>
+
+  <article>
+    <header>
+      <h1>Inference vs Distillation</h1>
+      <div class="meta"><time datetime="2026-10-14">October 14, 2026</time></div>
+    </header>
+
+    <p>Let me set a baseline before I make my argument.</p>
+
+    <p>Inference is simple. You have a model, you give it an input, you get an output. Nothing about the model changes. It does not learn anything from the exchange.</p>
+
+    <p>Distillation is different. You ask a big model to solve 100,000 programming problems. You collect the code it wrote, its explanations, its corrections. Then you train a smaller model on all of that. The smaller model picks up some of what the big one knew.</p>
+
+    <p>My argument is that coding agents need to move from inference alone to inference plus distillation.</p>
+
+    <p>Right now an agent reasons through the same things over and over. Understand the system. Pick an API. Handle the errors. Check the result. Next task, same system, it does all of it again from scratch. Nothing is kept.</p>
+
+    <p>What I want is for a successful run to leave something behind. Code, a tool, a workflow, a skill. Something the next agent can call instead of re-deriving.</p>
+
+    <p>Take a Kubernetes failure. Today the agent works out how to diagnose it every single time. What I want is for that process to become a tested diagnostic tool, and for the agent to only read its output and deal with whatever the tool did not expect.</p>
+
+    <p>To be precise, this is not model distillation. No weights get trained. It is reasoning being distilled into software. I have been calling it capability distillation, and I think the term holds up as long as you are clear about that difference.</p>
+
+    <p>The thesis in one line: every task an agent solves should leave behind tested software that makes the next run cheaper, faster, and more reliable.</p>
+
+    <p>Some places where this applies:</p>
+
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Use case</th><th>What the agent reasons through today</th><th>What gets distilled into software</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Kubernetes incident diagnosis</strong></td><td>Pod events, logs, resource limits, recent changes, to find the OOM or crash loop.</td><td>A diagnostic tool that gathers the evidence, checks the known failure patterns, and returns findings. The model handles the unfamiliar cases.</td></tr>
+        <tr><td><strong>Database performance investigation</strong></td><td>Queries for locks, blocking sessions, slow queries, missing indexes.</td><td>A database-specific tool that runs approved queries and produces the same report every time.</td></tr>
+        <tr><td><strong>Employee offboarding</strong></td><td>Which accounts, sessions, credentials, and permissions need revoking, across every system.</td><td>A workflow that discovers access, gets the approvals, revokes it, and verifies it is gone.</td></tr>
+        <tr><td><strong>API integration</strong></td><td>Read the docs, figure out auth, pagination, rate limits, error handling.</td><td>A connector with typed operations, retries, and tests. The next agent just calls it.</td></tr>
+        <tr><td><strong>Security remediation</strong></td><td>Read a finding and work out how to fix a public bucket or an overly permissive Kubernetes role.</td><td>A remediation tool with precondition checks, a proposed change, an approval gate, and verification.</td></tr>
+        <tr><td><strong>Data reconciliation</strong></td><td>How customer or invoice records map between the CRM, billing, and the database.</td><td>A reconciliation job with explicit mappings, discrepancy detection, and an exception queue.</td></tr>
+        <tr><td><strong>Legacy application automation</strong></td><td>Which screens and steps complete a business transaction.</td><td>A validated automation with checkpoints. The model steps in when the UI changes or something odd happens.</td></tr>
+        <tr><td><strong>Repository maintenance</strong></td><td>The project&rsquo;s conventions for adding an endpoint, migrating a schema, upgrading a dependency.</td><td>Repo-specific generators and checks that encode those conventions.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p>A concrete one from our own platform. Someone asks the agent to investigate why production is slow.</p>
+
+    <p>The first time, the agent finds the database, writes diagnostic queries, checks Kubernetes health, correlates the evidence, and writes a report. Once that run is validated, it saves the whole thing as a parameterized investigation tool.</p>
+
+    <p>The next time, the agent calls something like this:</p>
+
+<pre><code>investigate_performance(environment="production", window="30m")</code></pre>
+
+    <p>The tool collects and analyzes the predictable part. The model reasons about what is left over.</p>
+
+    <p>And it compounds. Every successful investigation can add a check or widen the coverage of the tool. You still need inference for new situations. But familiar work becomes software, which is what it should have been all along.</p>
+  </article>
+
+  <footer>
+    <a href="../index.html">← all posts</a>
+  </footer>
+</main>
+</body>
+</html>
